@@ -2,10 +2,11 @@ import pytest
 import requests
 import json
 import time
+import os
 
 @pytest.fixture
 def base_url():
-    return "http://127.0.0.1:8088"
+    return "http://127.0.0.1:" + str(os.environ['PORT'])
 
 def test_valid_post_hash(base_url):
     url = base_url + "/hash"

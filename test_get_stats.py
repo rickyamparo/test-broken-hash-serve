@@ -1,10 +1,11 @@
 import pytest
 import requests
 import json
+import os
 
 @pytest.fixture
 def base_url():
-    return "http://127.0.0.1:8088"
+    return "http://127.0.0.1:" + str(os.environ['PORT'])
 
 def test_valid_get_stats(base_url):
     url = base_url + "/stats"
