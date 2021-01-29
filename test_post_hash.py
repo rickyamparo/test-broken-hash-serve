@@ -7,6 +7,7 @@ from helper import Helper
 
 test_helper = Helper()
 
+# Checks if we can successfully create a hash identifier after the app has proccessed for 5 minutes
 def test_valid_post_hash():
     begin = time.time()
     response = test_helper.create_hash_id()

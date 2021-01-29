@@ -4,6 +4,7 @@ import json
 import os
 import asyncio
 
+# Tests to see if multple simulateneous requests can be handled by the application
 async def test_make_request():
     url = "http://127.0.0.1:" + str(os.environ['PORT']) + "/stats"
     response = requests.get(url)
