@@ -12,9 +12,17 @@ def open_app():
 def base_url():
     return "http://127.0.0.1:" + str(os.environ['PORT'])
 
-def test_graceful_shutdown(base_url,open_app):
-    open_app
-    time.sleep(2)
+def test_proper_intialize(base_url,open_app):
+    time.sleep(1)
+    url = base_url + '/stats'
+    try:
+        requests.get(url)
+        assert True
+    except requests.ConnectionError:
+        assert False
+
+def test_graceful_shutdown(base_url):
+    time.sleep(1)
     url = base_url + '/hash'
     data = 'shutdown'
     response = requests.post(url, data=data)
