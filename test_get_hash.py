@@ -8,7 +8,7 @@ from helper import Helper
 test_helper = Helper()
 
 def test_valid_get_hash():
-    hash_id = test_helper.create_hash_id()
+    hash_id = test_helper.create_hash_id().text
     url = test_helper.base_url() + "/hash/" + str(hash_id)
     headers = {'Accept':'application/json'}
     response = requests.get(url, headers=headers)

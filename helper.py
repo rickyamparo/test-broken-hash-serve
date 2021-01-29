@@ -25,7 +25,7 @@ class Helper:
         data = {'password':'angrymonkey'}
         headers = {'Accept':'application/json'}
         response = requests.post(self.base_url() + "/hash", json=data, headers=headers)
-        return response.text
+        return response
 
     def isBase64(self, s):
         try:
