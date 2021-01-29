@@ -14,3 +14,9 @@ def test_valid_get_stats(base_url):
     assert response_body['TotalRequests']
     assert response_body['AverageTime']
     assert response.status_code == 200
+
+def test_no_body(base_url):
+    url = base_url + "/stats"
+    data = {'password':'angrymonkey'}
+    response = requests.get(url, data=data)
+    assert response == 400
