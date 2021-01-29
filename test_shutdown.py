@@ -1,7 +1,5 @@
 import pytest
 import requests
-import subprocess
-import os
 import time
 from helper import Helper
 
