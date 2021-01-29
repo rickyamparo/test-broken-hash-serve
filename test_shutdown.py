@@ -3,33 +3,29 @@ import requests
 import subprocess
 import os
 import time
+from helper import Helper
 
-@pytest.fixture 
-def open_app():
-    return subprocess.Popen(['open', str(os.environ['BROKEN_HASH'])])
+test_helper = Helper()
 
-@pytest.fixture
-def base_url():
-    return "http://127.0.0.1:" + str(os.environ['PORT'])
-
-def test_proper_intialize(base_url,open_app):
+def test_proper_intialize():
+    test_helper.open_app()
     time.sleep(1)
-    url = base_url + '/stats'
+    url = test_helper.base_url() + '/stats'
     try:
         requests.get(url)
         assert True
     except requests.ConnectionError:
         assert False
 
-def test_graceful_shutdown(base_url):
+def test_graceful_shutdown():
     time.sleep(1)
-    url = base_url + '/hash'
+    url = test_helper.base_url() + '/hash'
     data = 'shutdown'
     response = requests.post(url, data=data)
     assert response.status_code == 200
 
-def test_no_additional_requests(base_url):
-    url = base_url + "/hash"
+def test_no_additional_requests():
+    url = test_helper.base_url() + "/hash"
     data = {'password':'angrymonkey'}
     headers = {'Accept':'application/json'}
     try:
