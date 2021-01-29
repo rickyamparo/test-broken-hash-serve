@@ -2,33 +2,29 @@ import pytest
 import requests
 import json
 import os
+import time
+from helper import Helper
 
-@pytest.fixture
-def base_url():
-    return "http://127.0.0.1:" + str(os.environ['PORT'])
+test_helper = Helper()
 
-def is_json(jsonobject):
-    try:
-        json.loads(jsonobject)
-    except ValueError:
-        return False
-    return True
+test_helper.open_app()
+time.sleep(1)
 
-def test_valid_get_stats(base_url):
-    url = base_url + "/stats"
+def test_valid_get_stats():
+    url = test_helper.base_url() + "/stats"
     response = requests.get(url)
     response_body = json.loads(response.text)
     assert response_body['TotalRequests']
     assert response_body['AverageTime']
     assert response.status_code == 200
 
-def test_no_body(base_url):
-    url = base_url + "/stats"
+def test_no_body():
+    url = test_helper.base_url() + "/stats"
     data = {'password':'angrymonkey'}
     response = requests.get(url, data=data)
     assert response == 400
 
-def test_is_valid_json(base_url):
-    url = base_url + "/stats"
+def test_is_valid_json():
+    url = test_helper.base_url() + "/stats"
     response = requests.get(url)
-    assert is_json(response.text)
+    assert test_helper.is_json(response.text)
