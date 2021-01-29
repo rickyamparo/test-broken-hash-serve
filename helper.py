@@ -1,6 +1,8 @@
 import subprocess
 import os
 import json
+import requests
+import base64
 
 class Helper:
     def _init_(self):
@@ -18,3 +20,15 @@ class Helper:
         except ValueError:
             return False
         return True
+
+    def create_hash_id(self):
+        data = {'password':'angrymonkey'}
+        headers = {'Accept':'application/json'}
+        response = requests.post(self.base_url() + "/hash", json=data, headers=headers)
+        return response.text
+
+    def isBase64(self, s):
+        try:
+            return base64.b64encode(base64.b64decode(s)) == s
+        except Exception:
+            return False
