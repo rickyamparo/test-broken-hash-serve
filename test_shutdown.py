@@ -19,3 +19,13 @@ def test_graceful_shutdown(base_url,open_app):
     data = 'shutdown'
     response = requests.post(url, data=data)
     assert response.status_code == 200
+
+def test_no_additional_requests(base_url):
+    url = base_url + "/hash"
+    data = {'password':'angrymonkey'}
+    headers = {'Accept':'application/json'}
+    try:
+        requests.post(url, data=data, headers=headers)
+        assert False
+    except requests.ConnectionError:
+        assert True
