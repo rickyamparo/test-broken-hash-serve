@@ -14,7 +14,7 @@ def base_url():
 
 def test_graceful_shutdown(base_url,open_app):
     open_app
-    time.sleep(.1)
+    time.sleep(2)
     url = base_url + '/hash'
     data = 'shutdown'
     response = requests.post(url, data=data)
