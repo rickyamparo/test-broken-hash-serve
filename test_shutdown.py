@@ -6,7 +6,7 @@ import time
 
 @pytest.fixture 
 def open_app():
-    return subprocess.Popen(['open',str(os.environ['BROKEN_HASH']])
+    return subprocess.Popen(['open', str(os.environ['BROKEN_HASH'])])
 
 @pytest.fixture
 def base_url():
