@@ -2,7 +2,6 @@ import pytest
 import requests
 import json
 import time
-import os
 from helper import Helper
 
 test_helper = Helper()

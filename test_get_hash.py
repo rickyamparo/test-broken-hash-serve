@@ -1,7 +1,5 @@
 import pytest
 import requests
-import json
-import base64
 import time
 from helper import Helper
 

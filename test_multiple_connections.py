@@ -1,12 +1,13 @@
 import pytest
 import requests
-import json
-import os
 import asyncio
+from helper import Helper
+
+test_helper = Helper()
 
 # Tests to see if multple simulateneous requests can be handled by the application
 async def test_make_request():
-    url = "http://127.0.0.1:" + str(os.environ['PORT']) + "/stats"
+    url = test_helper.base_url() + "/stats"
     response = requests.get(url)
     assert response.status_code == 200
     await asyncio.sleep(0.1)
